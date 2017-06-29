@@ -25,6 +25,7 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
       katello \
       rubygem-smart_proxy_discovery \
       tfm-rubygem-foreman_discovery && \
+      katello && \
 # VERSION is missing even though sclo-ror42 package claims it...
 # `foreman-installer` fails without its existence...
     mkdir -p /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1 && \
