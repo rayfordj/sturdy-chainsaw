@@ -1,0 +1,28 @@
+sudo: required
+dist: trusty
+group: deprecated-2017Q2
+
+services:
+ - docker
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y nodejs jq
+
+install:
+  - npm install -g dockerfile_lint
+
+before_script:
+  - mkdir $HOME/bin
+  - export PATH=$PATH:$HOME/bin
+  - tmp=`mktemp`
+  - echo '{"insecure-registries":["172.30.0.0/16"]}' > ${tmp}
+  - sudo mv ${tmp} /etc/docker/daemon.json
+  - sudo mount --make-shared /
+  - sudo service docker restart
+  - make lint
+
+script:
+  - make
+  - make test
+  - docker ps
