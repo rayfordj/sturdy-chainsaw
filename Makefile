@@ -17,7 +17,6 @@ test:
 	@sleep 5
 	@docker exec ${IMAGE_NAME} foreman-installer --list-scenarios
 	@docker exec ${IMAGE_NAME} foreman-installer --scenario katello --help
-	@docker exec ${IMAGE_NAME} systemctl status
 	@docker rm -f ${IMAGE_NAME}
 
 clean:
