@@ -13,11 +13,11 @@ lint:
 
 test:
 	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
-	$(eval CONTAINERID=$(shell docker run -tdi --hostname="localhost.localdomain" ${IMAGE_NAME}))
-	@sleep 15
-	@docker exec ${CONTAINERID} foreman-installer --help
-	@docker exec ${CONTAINERID} systemctl status
-	@docker rm -f ${CONTAINERID}
+	docker run -tdi --name ${IMAGE_NAME} --hostname="localhost.localdomain" ${IMAGE_NAME}
+	@sleep 5
+	@docker exec ${IMAGE_NAME} foreman-installer --help
+	@docker exec ${IMAGE_NAME} systemctl status
+	@docker rm -f ${IMAGE_NAME}
 
 clean:
 	rm -f build
