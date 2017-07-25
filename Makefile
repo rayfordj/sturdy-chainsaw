@@ -19,6 +19,5 @@ test:
 	@docker exec ${CONTAINERID} curl -k https://localhost.localdomain:9443/users/login/ 2>/dev/null | grep version
 	@docker rm -f ${CONTAINERID}
 
-
 clean:
 	rm -f build
