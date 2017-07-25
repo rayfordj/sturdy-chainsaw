@@ -14,8 +14,8 @@ lint:
 test:
 	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
 	$(eval CONTAINERID=$(shell docker run -tdi --hostname="localhost.localdomain" ${IMAGE_NAME}))
-	@sleep 5
-	@docker exec ${CONTAINERID} foreman-installer  --help
+	@sleep 15
+	@docker exec ${CONTAINERID} foreman-installer --help
 	@docker exec ${CONTAINERID} systemctl status
 	@docker rm -f ${CONTAINERID}
 
