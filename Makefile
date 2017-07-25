@@ -12,11 +12,11 @@ lint:
 	dockerfile_lint -f Dockerfile
 
 test:
-	$(eval CONTAINERID=$(shell docker run -tdi -p 9443:443 --hostname="localhost.localdomain" ${IMAGE_NAME}))
+	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
+	$(eval CONTAINERID=$(shell docker run -tdi --hostname="localhost.localdomain" ${IMAGE_NAME}))
 	@sleep 5
-	@docker exec ${CONTAINERID} foreman-installer --scenario katello
+	@docker exec ${CONTAINERID} foreman-installer  --help
 	@docker exec ${CONTAINERID} systemctl status
-	@docker exec ${CONTAINERID} curl -k https://localhost.localdomain:9443/users/login/ 2>/dev/null | grep version
 	@docker rm -f ${CONTAINERID}
 
 clean:
