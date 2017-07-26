@@ -6,6 +6,17 @@ ENV LANG=en_US.utf8 \
 
 EXPOSE 53 67 68 69 80 443 3000 3306 5910-5930 5432 8140 8443
 
+### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
+LABEL name="RHsyseng/foreman" \
+      vendor="Acme Corp" \
+      version="0.1" \
+      release="1" \
+      summary="Acme Corp's Foreman/Katello app" \
+      description="Foreman/Katello app will do ....." \
+### Required labels above - recommended below
+      url="https://www.acme.io" 
+
+
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
     yum -y install https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm && \
