@@ -1,5 +1,6 @@
-RUN_OPTS = --net=host \
-        --privileged \
+RUN_OPTS = --hostname="container2.priv.rhcsha.bos.redhat.com" \
+        --net=host \
+	--privileged \
         -p 192.168.172.1:53:53/udp \
         -p 192.168.172.1:53:53 \
         -p 192.168.172.1:67-68:67-68/udp \
@@ -13,8 +14,8 @@ RUN_OPTS = --net=host \
         -p 192.168.172.1:5910-5930:5910-5930 \
         -p 192.168.172.1:8140:8140 \
         -p 192.168.172.1:8443:8443 \
-        -p 192.168.172.1:9090:9090  \
-        --hostname="container2.priv.rhcsha.bos.redhat.com"
+        -p 192.168.172.1:9090:9090 
+        
 
 EXEC_OPTS = --foreman-admin-password="AdminPassword" \
         --foreman-proxy-dns true \
