@@ -1,4 +1,4 @@
-RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
+RUN_OPTS = --hostname="container1.priv.rhcsa.bos.redhat.com" \
         --net=host \
 	--privileged
         
@@ -6,7 +6,7 @@ RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
 EXEC_OPTS = --foreman-admin-password="AdminPassword" \
         --foreman-proxy-dns true \
         --foreman-proxy-dns-interface eth1 \
-        --foreman-proxy-dns-zone container1.priv.rhcsha.bos.redhat.com \
+        --foreman-proxy-dns-zone container1.priv.rhcsa.bos.redhat.com \
         --foreman-proxy-dns-forwarders 10.19.7.248 \
         --foreman-proxy-dns-reverse 172.168.192.in-addr.arpa \
         --foreman-proxy-dhcp true \
