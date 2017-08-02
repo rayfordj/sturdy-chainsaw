@@ -1,6 +1,46 @@
 RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
         --net=host \
 	--privileged
+        -v base1:/etc/foreman-proxy \
+        -v base2:/etc/httpd \
+        -v base3:/etc/foreman-installer \
+        -v base4:/etc/pki/katello \
+        -v base5:/etc/pki/katello-certs-tools \
+        -v base6:/etc/pki/pulp \
+        -v base7:/etc/pulp \
+        -v base8:/etc/puppet \
+        -v base9:/etc/qpid \
+        -v base10:/etc/qpid-dispatch \
+        -v base11:/root/ssl-build \
+        -v base12:/var/www/html/pub \
+        -v base13:/etc/squid \
+        -v base14:/etc/puppetlabs \
+        -v base15:/opt/puppetlabs/puppet/cache/foreman_cache_data \
+        -v base16:/opt/puppetlabs/puppet/ssl \
+        -v base17:/var/lib/puppet/foreman_cache_data \
+        -v base18:/var/lib/puppet/ssl \
+        -v katello1:/etc/candlepin \
+        -v katello2:/etc/foreman \
+        -v katello3:/etc/hammer \
+        -v katello4:/etc/sysconfig/tomcat \
+        -v katello5:/etc/tomcat \
+        -v katello6:/var/lib/candlepin \
+        -v db0:/var/lib/pulp \
+        -v db1:/var/lib/pgsql/data \
+        -v db2:/var/lib/mongodb \
+        -v feature0:/var/lib/tftpboot \ 
+        -v feature1:/var/named \
+        -v feature2:/etc/named \
+        -v feature3:/etc/named.conf \
+        -v feature4:/etc/named.iscdlv.key \
+        -v feature5:/etc/named.rfc1912.zones \
+        -v feature6:/etc/named.root.key \
+        -v feature7:/var/lib/dhcpd \
+        -v feature8:/etc/dhcp \
+        -v feature9:/usr/share/xml/scap 
+
+
+
         
 
 EXEC_OPTS = --foreman-admin-password="AdminPassword" \
