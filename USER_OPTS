@@ -28,7 +28,7 @@ RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
         -v db0:/var/lib/pulp \
         -v db1:/var/lib/pgsql/data \
         -v db2:/var/lib/mongodb \
-        -v feature0:/var/lib/tftpboot \ 
+        -v feature0:/var/lib/tftpboot \
         -v feature1:/var/named \
         -v feature2:/etc/named \
         -v feature3:/etc/named.conf \
