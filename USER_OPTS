@@ -1,7 +1,4 @@
-RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
-        --net=host \
-	--privileged
-        -v base1:/etc/foreman-proxy:Z \
+VOL_OPTS = -v base1:/etc/foreman-proxy:Z \
         -v base2:/etc/httpd:Z \
         -v base3:/etc/foreman-installer:Z \
         -v base4:/etc/pki/katello:Z \
@@ -39,6 +36,12 @@ RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
         -v feature8:/etc/dhcp:Z \
         -v feature9:/usr/share/xml/scap:Z 
 
+BUILD_OPTS = ${VOL_OPTS}
+
+RUN_OPTS = --hostname="container1.priv.rhcsha.bos.redhat.com" \
+        --net=host \
+	--privileged \
+	${VOL_OPTS}
 
 
         
