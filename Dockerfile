@@ -93,8 +93,8 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
     mkdir -p /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1 && \
     touch /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1/VERSION  && \
 # Foreman Discovery Image - latest
-    mkdir -p /var/lib/tftpboot/boot && \
-    wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/lib/tftpboot/boot && \
+    mkdir -p "${FK_DEST}"/var/lib/tftpboot/boot && \
+    wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C "${FK_DEST}"/var/lib/tftpboot/boot && \
     yum clean all 
 
 STOPSIGNAL SIGRTMIN+3
