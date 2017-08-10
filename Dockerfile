@@ -19,47 +19,47 @@ LABEL name="RHsyseng/foreman" \
 ### foreman/katello directories and files
 ENV FK_DEST="/var/foreman-vol"
 
-ENV FK_DIRS="
-/etc/candlepin
-/etc/dhcp
-/etc/foreman
-/etc/foreman-installer
-/etc/foreman-proxy
-/etc/hammer
-/etc/httpd
-/etc/named
-/etc/pki/katello
-/etc/pki/katello-certs-tools
-/etc/pki/pulp
-/etc/pulp
-/etc/puppet
-/etc/puppetlabs
-/etc/qpid
-/etc/qpid-dispatch
-/etc/squid
-/etc/tomcat
-/opt/puppetlabs/puppet/cache/foreman_cache_data
-/opt/puppetlabs/puppet/ssl
-/root/ssl-build
-/usr/share/xml/scap
-/var/lib/candlepin
-/var/lib/dhcpd
-/var/lib/mongodb
-/var/lib/pgsql/data
-/var/lib/pulp
-/var/lib/puppet/foreman_cache_data
-/var/lib/puppet/ssl
-/var/lib/tftpboot
-/var/named
-/var/www/html/pub
+ENV FK_DIRS=" \
+/etc/candlepin \
+/etc/dhcp \
+/etc/foreman \
+/etc/foreman-installer \
+/etc/foreman-proxy \
+/etc/hammer \
+/etc/httpd \
+/etc/named \
+/etc/pki/katello \
+/etc/pki/katello-certs-tools \
+/etc/pki/pulp \
+/etc/pulp \
+/etc/puppet \
+/etc/puppetlabs \
+/etc/qpid \
+/etc/qpid-dispatch \
+/etc/squid \
+/etc/tomcat \
+/opt/puppetlabs/puppet/cache/foreman_cache_data \
+/opt/puppetlabs/puppet/ssl \
+/root/ssl-build \
+/usr/share/xml/scap \
+/var/lib/candlepin \
+/var/lib/dhcpd \
+/var/lib/mongodb \
+/var/lib/pgsql/data \
+/var/lib/pulp \
+/var/lib/puppet/foreman_cache_data \
+/var/lib/puppet/ssl \
+/var/lib/tftpboot \
+/var/named \
+/var/www/html/pub \
 "
 
-ENV FK_FILES="
-/etc/named.conf
-/etc/named.iscdlv.key
-/etc/named.rfc1912.zones
-/etc/named.root.key
-/etc/sysconfig/tomcat
+ENV FK_FILES=" \
+/etc/named.conf \
+/etc/named.iscdlv.key \
+/etc/named.rfc1912.zones \
+/etc/named.root.key \
+/etc/sysconfig/tomcat \
 "
 
 RUN for d in "${FK_DIRS}" ; do mkdir -p "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -Tsf "${FK_DEST}"/"${d}" "${d}" ; done
