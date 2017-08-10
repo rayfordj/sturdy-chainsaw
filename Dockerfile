@@ -16,6 +16,56 @@ LABEL name="RHsyseng/foreman" \
 ### Required labels above - recommended below
       url="https://www.acme.io" 
 
+### foreman/katello directories and files
+FK_DEST="/var/foreman-vol"
+
+FK_DIRS="
+/etc/candlepin
+/etc/dhcp
+/etc/foreman
+/etc/foreman-installer
+/etc/foreman-proxy
+/etc/hammer
+/etc/httpd
+/etc/named
+/etc/pki/katello
+/etc/pki/katello-certs-tools
+/etc/pki/pulp
+/etc/pulp
+/etc/puppet
+/etc/puppetlabs
+/etc/qpid
+/etc/qpid-dispatch
+/etc/squid
+/etc/tomcat
+/opt/puppetlabs/puppet/cache/foreman_cache_data
+/opt/puppetlabs/puppet/ssl
+/root/ssl-build
+/usr/share/xml/scap
+/var/lib/candlepin
+/var/lib/dhcpd
+/var/lib/mongodb
+/var/lib/pgsql/data
+/var/lib/pulp
+/var/lib/puppet/foreman_cache_data
+/var/lib/puppet/ssl
+/var/lib/tftpboot
+/var/named
+/var/www/html/pub
+"
+
+FK_FILES="
+/etc/named.conf
+/etc/named.iscdlv.key
+/etc/named.rfc1912.zones
+/etc/named.root.key
+/etc/sysconfig/tomcat
+"
+
+RUN for d in "${FK_DIRS}" ; do mkdir -p "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -Tsf "${FK_DEST}"/"${d}" "${d}" ; done
+
+RUN for f in "${FK_FILES}" ; do cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" && ln -Tsf "${FK_DEST}"/"${f}" "${f}" ; done
+
 
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
@@ -53,6 +103,8 @@ RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket
     for i in ${MASK_JOBS}; do find /usr/lib/systemd/ -iname $i | grep ".wants" | xargs rm -f; done && \
     rm -f /etc/fstab && \
     systemctl set-default multi-user.target
+
+RUN tar --selinux --acls --xattrs -czvf /foreman-katello.tgz "${FK_DEST}" && rm -rfv "${FK_DEST}"/* && touch "${FK_DEST}"/NOT_A_VOLUME
 
 # RUN foreman-installer --scenario katello # --foreman-admin-password  "${ADMINPASSWORD}" 
 
