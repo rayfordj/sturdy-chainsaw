@@ -17,9 +17,9 @@ LABEL name="RHsyseng/foreman" \
       url="https://www.acme.io" 
 
 ### foreman/katello directories and files
-FK_DEST="/var/foreman-vol"
+ENV FK_DEST="/var/foreman-vol"
 
-FK_DIRS="
+ENV FK_DIRS="
 /etc/candlepin
 /etc/dhcp
 /etc/foreman
@@ -54,7 +54,7 @@ FK_DIRS="
 /var/www/html/pub
 "
 
-FK_FILES="
+ENV FK_FILES="
 /etc/named.conf
 /etc/named.iscdlv.key
 /etc/named.rfc1912.zones
