@@ -32,6 +32,7 @@ all: build
 build:
 	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
 	docker run -tdi --name ${IMAGE_NAME} ${RUN_OPTS} ${IMAGE_NAME}
+	docker exec ${IMAGE_NAME} tar -xzvf /foreman-katello.tgz -C /
 	docker exec ${IMAGE_NAME} foreman-installer --scenario katello ${EXEC_OPTS}
 	@if docker images ${IMAGE_NAME}:${VERSION}; then touch build; fi
 
