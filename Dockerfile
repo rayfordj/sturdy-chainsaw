@@ -63,9 +63,9 @@ ENV FK_FILES=" \
 /etc/sysconfig/tomcat \
 "
 
-RUN for d in "${FK_DIRS}" ; do mkdir -p "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -Tsf "${FK_DEST}"/"${d}" "${d}" ; done
+RUN for d in "${FK_DIRS}" ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -Tsf "${FK_DEST}"/"${d}" "${d}" ; done
 
-RUN for f in "${FK_FILES}" ; do cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" && ln -Tsf "${FK_DEST}"/"${f}" "${f}" ; done
+RUN for f in "${FK_FILES}" ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" ; fi && ln -Tsf "${FK_DEST}"/"${f}" "${f}" ; done
 
 
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
