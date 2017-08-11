@@ -101,9 +101,9 @@ RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket
     rm -f /etc/fstab && \
     systemctl set-default multi-user.target
 
-RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}""${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}"/"${d}" "${d}" ; done
+RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}""${d}" && cp -av "${d}" "${FK_DEST}""${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}""${d}" "${d}" ; done
 
-RUN for f in ${FK_FILES} ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}""${f}" && rm -fv "${f}" ; else mkdir -p "${FK_DEST}"/"$(dirname "${f}")" && touch "${FK_DEST}"/"${f}" ; fi && ln -vTsf "${FK_DEST}"/"${f}" "${f}" ; done
+RUN for f in ${FK_FILES} ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}""${f}" && rm -fv "${f}" ; else mkdir -p "${FK_DEST}""$(dirname "${f}")" && touch "${FK_DEST}""${f}" ; fi && ln -vTsf "${FK_DEST}""${f}" "${f}" ; done
 
 RUN tar --selinux --acls --xattrs -czvf /foreman-katello.tgz "${FK_DEST}" && rm -rfv "${FK_DEST}"/* && touch "${FK_DEST}"/NOT_A_VOLUME
 
