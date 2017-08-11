@@ -63,10 +63,6 @@ ENV FK_FILES=" \
 /etc/sysconfig/tomcat \
 "
 
-RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}"/"${d}" "${d}" ; done
-
-RUN for f in ${FK_FILES} ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" ; fi && ln -vTsf "${FK_DEST}"/"${f}" "${f}" ; done
-
 
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
@@ -104,6 +100,10 @@ RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket
     for i in ${MASK_JOBS}; do find /usr/lib/systemd/ -iname $i | grep ".wants" | xargs rm -f; done && \
     rm -f /etc/fstab && \
     systemctl set-default multi-user.target
+
+RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}"/"${d}" "${d}" ; done
+
+RUN for f in ${FK_FILES} ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" ; fi && ln -vTsf "${FK_DEST}"/"${f}" "${f}" ; done
 
 RUN tar --selinux --acls --xattrs -czvf /foreman-katello.tgz "${FK_DEST}" && rm -rfv "${FK_DEST}"/* && touch "${FK_DEST}"/NOT_A_VOLUME
 
