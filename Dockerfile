@@ -26,7 +26,8 @@ ENV FK_DIRS=" \
 /etc/foreman-installer \
 /etc/foreman-proxy \
 /etc/hammer \
-/etc/httpd \
+/etc/httpd/conf \
+/etc/httpd/conf.d \
 /etc/named \
 /etc/pki/katello \
 /etc/pki/katello-certs-tools \
