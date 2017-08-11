@@ -101,7 +101,7 @@ RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket
     rm -f /etc/fstab && \
     systemctl set-default multi-user.target
 
-RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}"/"${d}" "${d}" ; done
+RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}""${d}" && cp -av "${d}" "$(dirname "${FK_DEST}""${d}")" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}""${d}" "${d}" ; done
 
 RUN for f in ${FK_FILES} ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" ; fi && ln -vTsf "${FK_DEST}"/"${f}" "${f}" ; done
 
