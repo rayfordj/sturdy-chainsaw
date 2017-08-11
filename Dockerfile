@@ -63,7 +63,7 @@ ENV FK_FILES=" \
 /etc/sysconfig/tomcat \
 "
 
-RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}"/ "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}"/"${d}" "${d}" ; done
+RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}"/"${d}" && cp -av "${d}" "${FK_DEST}"/"${d}" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}"/"${d}" "${d}" ; done
 
 RUN for f in ${FK_FILES} ; do if [ -f "${f}" ] ; then cp -v "${f}" "${FK_DEST}"/"${f}" && rm -fv "${f}" ; fi && ln -vTsf "${FK_DEST}"/"${f}" "${f}" ; done
 
