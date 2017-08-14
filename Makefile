@@ -36,6 +36,7 @@ build:
 	docker run -tdi --name ${IMAGE_NAME} ${RUN_OPTS} ${IMAGE_NAME}
 	docker exec ${IMAGE_NAME} tar -xzvf /foreman-katello.tgz -C /
 #	docker exec ${IMAGE_NAME} bash -c "rsync -vaP /var/lib/tftpboot/  /var/foreman-vol/var/lib/tftpboot/ && rm -rfv /var/lib/tftpboot/ && ln -vTsf /var/foreman-vol/var/lib/tftpboot /var/lib/tftpboot"
+	docker exec ${IMAGE_NAME} bash -c "ls -hal /var/lib  /var/lib/tftpboot  /var/lib/tftpboot/boot /var/foreman-vol/var/lib  /var/foreman-vol/var/lib/tftpboot  /var/foreman-vol/var/lib/tftpboot/boot "
 	docker exec ${IMAGE_NAME} foreman-installer --scenario katello ${EXEC_OPTS}
 	@if docker images ${IMAGE_NAME}:${VERSION}; then touch build; fi
 
