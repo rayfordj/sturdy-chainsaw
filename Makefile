@@ -2,6 +2,8 @@ SHELL = /bin/sh
 VERSION = v0.1
 IMAGE_NAME = foreman
 
+VOL_OPTS =
+BUILD_OPTS =
 RUN_OPTS =
 EXEC_OPTS =
 
