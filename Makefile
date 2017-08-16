@@ -2,6 +2,8 @@ SHELL = /bin/sh
 VERSION = v0.1
 IMAGE_NAME = foreman
 
+VOL_OPTS =
+BUILD_OPTS =
 RUN_OPTS =
 EXEC_OPTS =
 
@@ -12,10 +14,10 @@ EXEC_OPTS =
 
 ifndef RUN_OPTS
 #Default options to pass `docker run` if no user override defined
-RUN_OPTS =  -p 443:443 \
+RUN_OPTS =  --hostname="localhost.localdomain" \
+	-p 443:443 \
         -p 8443:8443 \
-        -p 8140:8140 \
-        --hostname="localhost.localdomain"
+        -p 8140:8140
 endif
 
 ifndef EXEC_OPTS
