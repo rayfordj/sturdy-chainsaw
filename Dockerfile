@@ -105,7 +105,7 @@ RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}""${d}" && cp -av "${d}"
 
 RUN for f in ${FK_FILES} ; do cp -v "${f}" "${FK_DEST}""${f}" && rm -fv "${f}" || (mkdir -p "${FK_DEST}""$(dirname "${f}")" && touch "${FK_DEST}""${f}")  && ln -vTsf "${FK_DEST}""${f}" "${f}" ; done
 
-RUN tar --selinux --acls --xattrs -czvf /foreman-katello.tgz "${FK_DEST}" && rm -rfv "${FK_DEST}"/* && touch "${FK_DEST}"/NOT_A_VOLUME
+RUN rm -f "${FK_DEST}"/NOT_A_VOLUME && tar --selinux --acls --xattrs -czvf /foreman-katello.tgz "${FK_DEST}" && rm -rfv "${FK_DEST}"/* && touch "${FK_DEST}"/NOT_A_VOLUME
 
 # RUN foreman-installer --scenario katello # --foreman-admin-password  "${ADMINPASSWORD}" 
 
