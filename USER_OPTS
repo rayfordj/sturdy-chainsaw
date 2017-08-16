@@ -20,4 +20,24 @@ EXEC_OPTS =  --enable-foreman-plugin-discovery \
         --foreman-plugin-discovery-install-images=true \
         --foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
         --enable-foreman-plugin-remote-execution \
-        --enable-foreman-proxy-plugin-remote-execution-ssh
+        --enable-foreman-proxy-plugin-remote-execution-ssh \
+	--certs-pki-dir /var/foreman-vol/etc/pki/katello \
+	--certs-ssl-build-dir /var/foreman-vol/root/ssl-build \
+	--foreman-app-root /var/foreman-vol/usr/share/foreman \
+	--foreman-puppet-home /var/foreman-vol/var/lib/puppet \
+	--foreman-puppet-ssldir /var/foreman-vol/var/lib/puppet/ssl \
+	--foreman-proxy-dir /var/foreman-vol/usr/share/foreman-proxy \
+	--foreman-proxy-puppetdir /var/foreman-vol/etc/puppet \
+	--foreman-proxy-ssldir /var/foreman-vol/var/lib/puppet/ssl \
+	--foreman-proxy-tftp-root /var/foreman-vol/var/lib/tftpboot \
+	--foreman-proxy-plugin-ansible-ansible-dir /var/foreman-vol/etc/ansible \
+	--foreman-proxy-plugin-pulp-mongodb-dir /var/foreman-vol/var/lib/mongodb \
+	--foreman-proxy-plugin-pulp-pulp-content-dir /var/foreman-vol/var/lib/pulp/content \
+	--foreman-proxy-plugin-pulp-pulp-dir /var/foreman-vol/var/lib/pulp \
+	--foreman-proxy-plugin-pulp-puppet-content-dir /var/foreman-vol/etc/puppet/environments \
+	--puppet-codedir /var/foreman-vol/etc/puppet \
+	--puppet-dir /var/foreman-vol/etc/puppet \
+	--puppet-sharedir /var/foreman-vol/usr/share/puppet \
+	--puppet-vardir /var/foreman-vol/var/lib/puppet \
+	--puppet-server-dir /var/foreman-vol/etc/puppet \
+	--puppet-server-ssl-dir /var/foreman-vol/var/lib/puppet/ssl
