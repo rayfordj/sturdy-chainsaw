@@ -16,6 +16,7 @@ RUN_OPTS =  --hostname="localhost.localdomain" \
 
 #Default options 
 EXEC_OPTS =  --enable-foreman-plugin-discovery \
+        -v  --verbose-log-level debug \
         --foreman-plugin-discovery-source-url=http://downloads.theforeman.org/discovery/releases/3.0/ \
         --foreman-plugin-discovery-install-images=true \
         --foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
