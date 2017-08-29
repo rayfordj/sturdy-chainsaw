@@ -20,4 +20,5 @@ EXEC_OPTS =  --enable-foreman-plugin-discovery \
         --foreman-plugin-discovery-install-images=true \
         --foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
         --enable-foreman-plugin-remote-execution \
+        --puppet-server-dir /var/foreman-vol/etc/puppet \
         --enable-foreman-proxy-plugin-remote-execution-ssh
