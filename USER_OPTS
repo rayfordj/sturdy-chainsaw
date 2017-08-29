@@ -20,6 +20,7 @@ EXEC_OPTS =  --enable-foreman-plugin-discovery \
         --foreman-plugin-discovery-install-images=true \
         --foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
         --enable-foreman-plugin-remote-execution \
+        --certs-pki-dir /var/foreman-vol/etc/pki/katello \
         --certs-ssl-build-dir /var/foreman-vol/root/ssl-build \
         --foreman-app-root /var/foreman-vol/usr/share/foreman \
         --foreman-puppet-home /var/foreman-vol/var/lib/puppet \
