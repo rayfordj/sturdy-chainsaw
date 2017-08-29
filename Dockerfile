@@ -30,6 +30,8 @@ ENV FK_DIRS=" \
 /etc/httpd/conf.d \
 /etc/named \
 /etc/pki/katello \
+/etc/pki/katello/certs \
+/etc/pki/katello/private \
 /etc/pki/katello-certs-tools \
 /etc/pki/pulp \
 /etc/pulp \
@@ -42,6 +44,7 @@ ENV FK_DIRS=" \
 /opt/puppetlabs/puppet/cache/foreman_cache_data \
 /opt/puppetlabs/puppet/ssl \
 /root/ssl-build \
+/usr/share/foreman/tmp \
 /usr/share/xml/scap \
 /var/lib/candlepin \
 /var/lib/dhcpd \
@@ -51,6 +54,7 @@ ENV FK_DIRS=" \
 /var/lib/puppet/foreman_cache_data \
 /var/lib/puppet/ssl \
 /var/lib/tftpboot \
+/var/lib/tftpboot/grub2 \
 /var/named \
 /var/www/html/pub \
 "
