@@ -20,6 +20,7 @@ EXEC_OPTS =  --enable-foreman-plugin-discovery \
         --foreman-plugin-discovery-install-images=true \
         --foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
         --enable-foreman-plugin-remote-execution \
+        --foreman-proxy-plugin-pulp-mongodb-dir /var/foreman-vol/var/lib/mongodb \
         --foreman-proxy-plugin-pulp-pulp-content-dir /var/foreman-vol/var/lib/pulp/content \
         --foreman-proxy-plugin-pulp-pulp-dir /var/foreman-vol/var/lib/pulp \
         --foreman-proxy-plugin-pulp-puppet-content-dir /var/foreman-vol/etc/puppet/environments \
