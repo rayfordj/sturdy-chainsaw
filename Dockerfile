@@ -16,6 +16,9 @@ LABEL name="RHsyseng/foreman" \
 ### Required labels above - recommended below
       url="https://www.acme.io" 
 
+# Script to relocate to volume post-installation completion
+COPY relocate-foreman.sh /root/relocate-foreman.sh
+RUN chmod 0755 /root/relocate-foreman.sh
 
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
