@@ -49,7 +49,12 @@ FK_FILES=" \
 /etc/sysconfig/tomcat \
 "
 
+#Stop services
+katello-service stop
+systemctl stop puppet xinetd
 
+
+#Shuffle data
 for d in ${FK_DIRS} ; do 
         mkdir -p "${FK_DEST}""${d}" &&  \
         if [ -d "${d}" ]; then 
@@ -65,4 +70,7 @@ for f in ${FK_FILES} ; do
         ln -vTsf "${FK_DEST}""${f}" "${f}" ; done
 
 
+#Start services
+systemctl start puppet xinetd
+katello-service start
 
