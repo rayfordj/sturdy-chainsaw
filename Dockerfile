@@ -16,53 +16,6 @@ LABEL name="RHsyseng/foreman" \
 ### Required labels above - recommended below
       url="https://www.acme.io" 
 
-### foreman/katello directories and files
-ENV FK_DEST="/var/foreman-vol"
-
-ENV FK_DIRS=" \
-/etc/candlepin \
-/etc/dhcp \
-/etc/foreman \
-/etc/foreman-installer \
-/etc/foreman-proxy \
-/etc/hammer \
-/etc/httpd/conf \
-/etc/httpd/conf.d \
-/etc/named \
-/etc/pki/katello \
-/etc/pki/katello-certs-tools \
-/etc/pki/pulp \
-/etc/pulp \
-/etc/puppet \
-/etc/puppetlabs \
-/etc/qpid \
-/etc/qpid-dispatch \
-/etc/squid \
-/etc/tomcat \
-/opt/puppetlabs/puppet/cache/foreman_cache_data \
-/opt/puppetlabs/puppet/ssl \
-/root/ssl-build \
-/usr/share/xml/scap \
-/var/lib/candlepin \
-/var/lib/dhcpd \
-/var/lib/mongodb \
-/var/lib/pgsql/data \
-/var/lib/pulp \
-/var/lib/puppet/foreman_cache_data \
-/var/lib/puppet/ssl \
-/var/lib/tftpboot \
-/var/named \
-/var/www/html/pub \
-"
-
-ENV FK_FILES=" \
-/etc/named.conf \
-/etc/named.iscdlv.key \
-/etc/named.rfc1912.zones \
-/etc/named.root.key \
-/etc/sysconfig/tomcat \
-"
-
 
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
@@ -101,12 +54,6 @@ RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket
     rm -f /etc/fstab && \
     systemctl set-default multi-user.target
 
-##RUN for d in ${FK_DIRS} ; do mkdir -p "${d}" "${FK_DEST}""${d}" && cp -av "${d}" "$(dirname "${FK_DEST}""${d}")" && rm -rfv "${d}" && ln -vTsf "${FK_DEST}""${d}" "${d}" ; done
-#RUN for d in ${FK_DIRS} ; do mkdir -p "${FK_DEST}""${d}" &&  if [ -d "${d}" ]; then cp -av "${d}" "$(dirname "${FK_DEST}""${d}")" && rm -rfv "${d}" ; fi && ln -vTsf "${FK_DEST}""${d}" "${d}" ; done
-
-#RUN for f in ${FK_FILES} ; do cp -v "${f}" "${FK_DEST}""${f}" && rm -fv "${f}" || (mkdir -p "${FK_DEST}""$(dirname "${f}")" && touch "${FK_DEST}""${f}")  && ln -vTsf "${FK_DEST}""${f}" "${f}" ; done
-
-#RUN rm -f "${FK_DEST}"/NOT_A_VOLUME && tar --selinux --acls --xattrs -czvf /foreman-katello.tgz "${FK_DEST}" && rm -rfv "${FK_DEST}"/* && touch "${FK_DEST}"/NOT_A_VOLUME
 
 # RUN foreman-installer --scenario katello # --foreman-admin-password  "${ADMINPASSWORD}" 
 
