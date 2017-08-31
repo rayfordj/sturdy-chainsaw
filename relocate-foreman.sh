@@ -54,6 +54,7 @@ katello-service stop
 systemctl stop puppet xinetd
 
 
+if [[ ! -f "${FK_DEST}"/PERSISTED ]] && [[ ! -h /etc/foreman-installer ]]; then 
 #Shuffle data
 for d in ${FK_DIRS} ; do 
         mkdir -p "${FK_DEST}""${d}" &&  \
@@ -69,7 +70,23 @@ for f in ${FK_FILES} ; do
         touch "${FK_DEST}""${f}")  && \
         ln -vTsf "${FK_DEST}""${f}" "${f}" ; done
 
+touch "${FK_DEST}"/PERSISTED
+fi
 
+
+if [[ -f "${FK_DEST}"/PERSISTED ]] && [[  ! -h /etc/foreman-installer ]]; then 
+#Persisted, not setup
+for d in ${FK_DIRS} ; do 
+        if [ ! -h "${d}" ]; then 
+                rm -rfv "${d}" ; fi && \
+        ln -vTsf "${FK_DEST}""${d}" "${d}" ; done
+
+for f in ${FK_FILES} ; do 
+        if [ ! -h "${f}" ]; then 
+                rm -fv "${f}" ; fi && \
+        ln -vTsf "${FK_DEST}""${f}" "${f}" ; done
+
+fi
 #Start services
 systemctl start puppet xinetd
 katello-service start
