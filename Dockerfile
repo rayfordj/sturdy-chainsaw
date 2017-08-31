@@ -47,9 +47,9 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
 # `foreman-installer` fails without its existence...
     mkdir -p /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1 && \
     touch /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1/VERSION  && \
-# Foreman Discovery Image - latest
-    mkdir -p /var/foreman-vol/var/lib/tftpboot/boot && \
-    wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/foreman-vol/var/lib/tftpboot/boot && \
+## Foreman Discovery Image - latest
+#    mkdir -p /var/foreman-vol/var/lib/tftpboot/boot && \
+#    wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/foreman-vol/var/lib/tftpboot/boot && \
     yum clean all 
 
 STOPSIGNAL SIGRTMIN+3
