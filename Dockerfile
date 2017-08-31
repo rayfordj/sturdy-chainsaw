@@ -52,6 +52,7 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
     wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/foreman-vol/var/lib/tftpboot/boot && \
     yum clean all 
 
+
 STOPSIGNAL SIGRTMIN+3
 RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket ipmievd.service" && \
     systemctl mask ${MASK_JOBS} && \
