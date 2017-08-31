@@ -1,33 +1,23 @@
 #Default options 
-
 VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z 
 
+
+#Default options 
 BUILD_OPTS = 
 
-RUN_OPTS = --hostname="container2.priv.rhcsha.bos.redhat.com" \
-        --net=host \
-	--privileged \
-	${VOL_OPTS}
 
-
+#Default options 
+RUN_OPTS =  --hostname="localhost.localdomain" \
+	-p 443:443 \
+        -p 8443:8443 \
+        -p 8140:8140 \
+        ${VOL_OPTS}
         
 
-EXEC_OPTS = --foreman-admin-password="AdminPassword" \
-        --foreman-proxy-dns true \
-        --foreman-proxy-dns-interface eth1 \
-        --foreman-proxy-dns-zone container2.priv.rhcsha.bos.redhat.com \
-        --foreman-proxy-dns-forwarders 10.19.7.248 \
-        --foreman-proxy-dns-reverse 173.168.192.in-addr.arpa \
-        --foreman-proxy-dhcp true \
-        --foreman-proxy-dhcp-interface eth1 \
-        --foreman-proxy-dhcp-range "192.168.173.101 192.168.173.199" \
-        --foreman-proxy-dhcp-gateway 192.168.173.1 \
-        --foreman-proxy-dhcp-nameservers 192.168.173.1 \
-        --foreman-proxy-puppet true \
-        --foreman-proxy-puppetca true \
-        --enable-foreman-plugin-discovery \
+#Default options 
+EXEC_OPTS =  --enable-foreman-plugin-discovery \
         --foreman-plugin-discovery-source-url=http://downloads.theforeman.org/discovery/releases/3.0/ \
         --foreman-plugin-discovery-install-images=true \
-        --foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
+	--foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
         --enable-foreman-plugin-remote-execution \
         --enable-foreman-proxy-plugin-remote-execution-ssh
