@@ -1,3 +1,5 @@
+#Default options 
+
 VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z 
 
 BUILD_OPTS = 
@@ -13,7 +15,7 @@ RUN_OPTS = --hostname="container2.priv.rhcsha.bos.redhat.com" \
 EXEC_OPTS = --foreman-admin-password="AdminPassword" \
         --foreman-proxy-dns true \
         --foreman-proxy-dns-interface eth1 \
-        --foreman-proxy-dns-zone container1.priv.rhcsha.bos.redhat.com \
+        --foreman-proxy-dns-zone container2.priv.rhcsha.bos.redhat.com \
         --foreman-proxy-dns-forwarders 10.19.7.248 \
         --foreman-proxy-dns-reverse 173.168.192.in-addr.arpa \
         --foreman-proxy-dhcp true \

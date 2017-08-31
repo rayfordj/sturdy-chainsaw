@@ -14,10 +14,10 @@ EXEC_OPTS =
 
 ifndef RUN_OPTS
 #Default options to pass `docker run` if no user override defined
-RUN_OPTS =  -p 443:443 \
+RUN_OPTS =  --hostname="localhost.localdomain" \
+	-p 443:443 \
         -p 8443:8443 \
-        -p 8140:8140 \
-        --hostname="localhost.localdomain"
+        -p 8140:8140
 endif
 
 ifndef EXEC_OPTS
@@ -32,12 +32,10 @@ endif
 
 all: build
 build:
-	docker build --pull ${BUILD_OPTS} -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
+	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
 	docker run -tdi --name ${IMAGE_NAME} ${RUN_OPTS} ${IMAGE_NAME}
-	docker exec ${IMAGE_NAME} tar -xzvf /foreman-katello.tgz -C /
-#	docker exec ${IMAGE_NAME} bash -c "rsync -vaP /var/lib/tftpboot/  /var/foreman-vol/var/lib/tftpboot/ && rm -rfv /var/lib/tftpboot/ && ln -vTsf /var/foreman-vol/var/lib/tftpboot /var/lib/tftpboot"
-	docker exec ${IMAGE_NAME} bash -c "ls -hal /var/lib  /var/lib/tftpboot  /var/lib/tftpboot/boot /var/foreman-vol/var/lib  /var/foreman-vol/var/lib/tftpboot  /var/foreman-vol/var/lib/tftpboot/boot "
 	docker exec ${IMAGE_NAME} foreman-installer --scenario katello ${EXEC_OPTS}
+	docker exec ${IMAGE_NAME} /root/relocate-foreman.sh
 	@if docker images ${IMAGE_NAME}:${VERSION}; then touch build; fi
 
 lint:
