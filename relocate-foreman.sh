@@ -64,7 +64,7 @@ for d in ${FK_DIRS} ; do
         ln -vTsf "${FK_DEST}""${d}" "${d}" ; done
 
 for f in ${FK_FILES} ; do 
-        cp -v "${f}" "${FK_DEST}""${f}" && \
+        cp -av "${f}" "${FK_DEST}""${f}" && \
         rm -fv "${f}" || \
         (mkdir -p "${FK_DEST}""$(dirname "${f}")" && \
         touch "${FK_DEST}""${f}")  && \
