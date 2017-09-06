@@ -51,7 +51,7 @@ FK_FILES=" \
 
 #Stop services
 katello-service stop
-systemctl stop puppet xinetd
+systemctl stop dhcpd named puppet xinetd 
 
 
 if [[ ! -f "${FK_DEST}"/PERSISTED ]] && [[ ! -h /etc/foreman-installer ]]; then 
@@ -88,6 +88,6 @@ for f in ${FK_FILES} ; do
 
 fi
 #Start services
-systemctl start puppet xinetd
+systemctl start dhcpd named puppet xinetd 
 katello-service start
 
