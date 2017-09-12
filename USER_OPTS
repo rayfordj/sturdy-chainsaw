@@ -1,5 +1,6 @@
 #Default options 
-VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z 
+VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z \
+        -v foreman_pulp_vol:/var/lib/pulp:Z
 
 
 #Default options 

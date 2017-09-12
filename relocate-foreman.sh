@@ -33,7 +33,6 @@ FK_DIRS=" \
 /var/lib/dhcpd \
 /var/lib/mongodb \
 /var/lib/pgsql/data \
-/var/lib/pulp \
 /var/lib/puppet/foreman_cache_data \
 /var/lib/puppet/ssl \
 /var/lib/tftpboot \
