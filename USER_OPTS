@@ -1,8 +1,10 @@
 #Default options 
+VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z \
+        -v foreman_pulp_vol:/var/lib/pulp:Z
 
-VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z 
 
 BUILD_OPTS = 
+
 
 RUN_OPTS = --hostname="container2.priv.rhcsha.bos.redhat.com" \
         --net=host \
