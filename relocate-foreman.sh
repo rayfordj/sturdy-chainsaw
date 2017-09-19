@@ -28,6 +28,7 @@ FK_DIRS=" \
 /opt/puppetlabs/puppet/cache/foreman_cache_data \
 /opt/puppetlabs/puppet/ssl \
 /root/ssl-build \
+/usr/share/foreman-proxy \
 /usr/share/xml/scap \
 /var/lib/candlepin \
 /var/lib/dhcpd \
