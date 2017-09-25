@@ -45,6 +45,9 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
 # `foreman-installer` fails without its existence...
     mkdir -p /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1 && \
     touch /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1/VERSION  && \
+# package name change in centos base 
+        ## /usr/share/foreman-installer/modules/foreman_proxy/manifests/tftp.pp
+    sed -i.orig -e "s/'grub2-efi'/'grub2-efi-x64'/" -e "s/'grub2-efi-modules'/'grub2-efi-x64-modules'/" -e "s/'shim'/'shim-x64'/" /usr/share/foreman-installer/modules/foreman_proxy/manifests/tftp.pp && \
 # Foreman Discovery Image - latest
     mkdir -p /var/foreman-vol/var/lib/tftpboot/boot && \
     wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/foreman-vol/var/lib/tftpboot/boot && \
