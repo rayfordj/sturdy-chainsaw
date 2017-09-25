@@ -39,6 +39,7 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
       foreman-proxy	\
       foreman-selinux  \
       katello \
+      tfm-rubygem-foreman_dhcp_browser \
       rubygem-smart_proxy_discovery \
       tfm-rubygem-foreman_discovery \
       tfm-rubygem-foreman_remote_execution \
