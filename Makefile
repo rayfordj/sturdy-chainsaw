@@ -2,6 +2,8 @@ SHELL = /bin/sh
 VERSION = v0.1
 IMAGE_NAME = foreman
 
+VOL_OPTS =
+BUILD_OPTS =
 RUN_OPTS =
 EXEC_OPTS =
 
@@ -10,12 +12,21 @@ EXEC_OPTS =
 #       should be placed in file USER_OPTS
 -include USER_OPTS
 
+ifndef VOL_OPTS
+#Default volume options for persisting if no user override defined
+###  If changing destination location ( :/var/...:Z ), should    \
+###	edit relocate-foreman.sh to reflect changes
+VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z \
+        -v foreman_pulp_vol:/var/lib/pulp:Z
+
+endif
+
 ifndef RUN_OPTS
 #Default options to pass `docker run` if no user override defined
-RUN_OPTS =  -p 443:443 \
+RUN_OPTS =  --hostname="localhost.localdomain" \
+	-p 443:443 \
         -p 8443:8443 \
-        -p 8140:8140 \
-        --hostname="localhost.localdomain"
+        -p 8140:8140
 endif
 
 ifndef EXEC_OPTS
@@ -33,6 +44,13 @@ build:
 	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
 	docker run -tdi --name ${IMAGE_NAME} ${RUN_OPTS} ${IMAGE_NAME}
 	docker exec ${IMAGE_NAME} foreman-installer --scenario katello ${EXEC_OPTS}
+	@if docker images ${IMAGE_NAME}:${VERSION}; then touch build; fi
+
+persist:
+	docker build --pull -t ${IMAGE_NAME}:${VERSION} -t ${IMAGE_NAME} .
+	docker run -tdi --name ${IMAGE_NAME} ${RUN_OPTS} ${VOL_OPTS} ${IMAGE_NAME}
+	docker exec ${IMAGE_NAME} foreman-installer --scenario katello ${EXEC_OPTS}
+	docker exec ${IMAGE_NAME} /root/relocate-foreman.sh
 	@if docker images ${IMAGE_NAME}:${VERSION}; then touch build; fi
 
 lint:

@@ -1,12 +1,25 @@
 #Default options 
-RUN_OPTS =  -p 443:443 \
+###  If changing destination location ( :/var/...:Z ), should    \
+###     edit relocate-foreman.sh to reflect changes
+VOL_OPTS = -v foreman_vol:/var/foreman-vol:Z \
+        -v foreman_pulp_vol:/var/lib/pulp:Z
+
+
+#Default options 
+BUILD_OPTS = 
+
+
+#Default options 
+RUN_OPTS =  --hostname="localhost.localdomain" \
+	-p 443:443 \
         -p 8443:8443 \
-        -p 8140:8140 \
-        --hostname="localhost.localdomain"
+        -p 8140:8140 
+
 
 #Default options 
 EXEC_OPTS =  --enable-foreman-plugin-discovery \
         --foreman-plugin-discovery-source-url=http://downloads.theforeman.org/discovery/releases/3.0/ \
         --foreman-plugin-discovery-install-images=true \
+	--foreman-plugin-discovery-tftp-root /var/foreman-vol/var/lib/tftpboot \
         --enable-foreman-plugin-remote-execution \
         --enable-foreman-proxy-plugin-remote-execution-ssh
