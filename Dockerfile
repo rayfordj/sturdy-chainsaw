@@ -16,6 +16,9 @@ LABEL name="RHsyseng/foreman" \
 ### Required labels above - recommended below
       url="https://www.acme.io" 
 
+# Script to relocate to volume post-installation completion
+COPY relocate-foreman.sh /root/relocate-foreman.sh
+RUN chmod 0755 /root/relocate-foreman.sh
 
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
@@ -34,6 +37,7 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
       foreman-proxy	\
       foreman-selinux  \
       katello \
+      tfm-rubygem-foreman_dhcp_browser \
       rubygem-smart_proxy_discovery \
       tfm-rubygem-foreman_discovery \
       tfm-rubygem-foreman_remote_execution \
@@ -42,9 +46,12 @@ RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Cri
 # `foreman-installer` fails without its existence...
     mkdir -p /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1 && \
     touch /opt/rh/sclo-ror42/root/usr/share/gems/gems/mail-2.6.1/VERSION  && \
+# package name change in centos base 
+        ## /usr/share/foreman-installer/modules/foreman_proxy/manifests/tftp.pp
+    sed -i.orig -e "s/'grub2-efi'/'grub2-efi-x64'/" -e "s/'grub2-efi-modules'/'grub2-efi-x64-modules'/" -e "s/'shim'/'shim-x64'/" /usr/share/foreman-installer/modules/foreman_proxy/manifests/tftp.pp && \
 # Foreman Discovery Image - latest
-    mkdir -p /var/lib/tftpboot/boot && \
-    wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/lib/tftpboot/boot && \
+    mkdir -p /var/foreman-vol/var/lib/tftpboot/boot && \
+    wget http://downloads.theforeman.org/discovery/releases/3.0/fdi-image-latest.tar   -O - | tar x --overwrite -C /var/foreman-vol/var/lib/tftpboot/boot && \
     yum clean all 
 
 STOPSIGNAL SIGRTMIN+3
@@ -53,6 +60,7 @@ RUN MASK_JOBS="sys-fs-fuse-connections.mount getty.target systemd-initctl.socket
     for i in ${MASK_JOBS}; do find /usr/lib/systemd/ -iname $i | grep ".wants" | xargs rm -f; done && \
     rm -f /etc/fstab && \
     systemctl set-default multi-user.target
+
 
 # RUN foreman-installer --scenario katello # --foreman-admin-password  "${ADMINPASSWORD}" 
 
