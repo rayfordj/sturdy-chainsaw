@@ -23,10 +23,12 @@ RUN chmod 0755 /root/relocate-foreman.sh
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical --setopt=tsflags=nodocs && \
     yum -y install epel-release centos-release-scl && \
     yum -y install https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm && \
-    yum -y install https://yum.theforeman.org/releases/latest/el7/x86_64/foreman-release.rpm && \
+#    yum -y install https://yum.theforeman.org/releases/latest/el7/x86_64/foreman-release.rpm && \
+    yum -y install http://yum.theforeman.org/releases/1.15/el7/x86_64/foreman-release.rpm && \
     yum -y install http://fedorapeople.org/groups/katello/releases/yum/3.4/katello/el7/x86_64/katello-repos-latest.rpm && \
 ## katello/foreman installer packages
     yum -y install --setopt=tsflags=nodocs \
+      puppet-agent \
       foreman \
       foreman-cli \
       foreman-debug	\
